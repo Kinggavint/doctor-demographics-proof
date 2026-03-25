@@ -261,6 +261,42 @@
   gap: var(--space-4);
 }
 
+/* ApexAI Labs Logo Link */
+.apex-logo-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  background: rgba(234, 120, 25, 0.1);
+  border: 1px solid rgba(234, 120, 25, 0.25);
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  white-space: nowrap;
+}
+
+.apex-logo-link:hover {
+  background: rgba(234, 120, 25, 0.18);
+  border-color: rgba(234, 120, 25, 0.45);
+  transform: translateY(-1px);
+}
+
+.apex-logo-icon {
+  flex-shrink: 0;
+}
+
+.apex-logo-text {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: hsl(25, 95%, 53%);
+  letter-spacing: 0.02em;
+}
+
+.apex-logo-link--mobile {
+  margin-top: var(--space-4);
+  justify-content: center;
+}
+
 /* Theme Toggle */
 .theme-toggle {
   display: flex;
