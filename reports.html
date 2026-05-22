@@ -1,168 +1,384 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reports | Doctor Demographics</title>
-  <meta name="description" content="Explore Doctor Demographics reports: Best Sites, Practice Site Viability, Competition Reports, and consultations to help you choose the right market with confidence." />
+  <meta name="description" content="Explore Doctor Demographics reports: Best Sites, Practice Site Viability, Competition, and Telephone Consultation. Each report is researched, hand-written, and reviewed with you in a one-on-one call.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Reports | Doctor Demographics">
+  <meta property="og:description" content="Demographic reports built for doctors deciding where to practice, evaluate a location, study competition, or talk strategy with an expert.">
+  <meta property="og:image" content="./assets/dd-logo-square.png">
+  <meta property="og:type" content="website">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets (match index.html) -->
+  <link rel="stylesheet" href="./base.css">
+  <link rel="stylesheet" href="./style.css">
+
+  <!-- Page-scoped tokens (use the same navy/gold/orange palette as the homepage) -->
   <style>
-    .reports-hero { padding: 96px 0 48px; background: linear-gradient(180deg, rgba(24,139,246,.10), rgba(55,202,55,.06)); }
-    .reports-hero h1 { font-size: clamp(2rem, 3vw, 3rem); margin: 0 0 10px; }
-    .reports-hero p { max-width: 70ch; }
-    .reports-grid { display: grid; gap: 24px; grid-template-columns: repeat(12, 1fr); }
-    .reports-grid .service-card { grid-column: span 6; }
-    @media (max-width: 900px){ .reports-grid .service-card { grid-column: span 12; } }
-    .service-card__meta { margin-top: 14px; display:flex; gap:12px; flex-wrap:wrap; }
-    .service-chip { display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; background: rgba(0,0,0,.04); font-size:.9rem; }
-    .service-chip svg { width:16px; height:16px; }
-    .reports-cta { padding: 56px 0; }
-    .reports-cta .cta-card { background: #0b1220; color:#fff; padding: 28px; border-radius: 16px; display:flex; justify-content:space-between; align-items:center; gap: 18px; flex-wrap:wrap; }
-    .reports-cta .cta-card a { background: var(--primary-color, #37ca37); color:#06210f; padding: 12px 16px; border-radius: 10px; font-weight: 700; text-decoration:none; }
+    .page-hero {
+      position: relative;
+      padding: 120px 0 64px;
+      background: linear-gradient(135deg, var(--color-primary, #0B2545) 0%, #0F2F5F 100%);
+      color: #fff;
+      overflow: hidden;
+    }
+    .page-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(1200px 600px at 70% 40%, rgba(212,175,55,0.10), transparent 60%);
+      pointer-events: none;
+    }
+    .page-hero .section__eyebrow {
+      color: var(--color-accent, #D4AF37);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin: 0 0 12px;
+    }
+    .page-hero h1 {
+      font-size: clamp(2.25rem, 4vw, 3.5rem);
+      line-height: 1.1;
+      margin: 0 0 16px;
+      color: #fff;
+    }
+    .page-hero p {
+      max-width: 64ch;
+      font-size: 1.125rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.85);
+    }
+    .reports-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+      margin-top: 32px;
+    }
+    @media (max-width: 900px) {
+      .reports-grid { grid-template-columns: 1fr; }
+    }
+    .report-chips {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .report-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(11, 37, 69, 0.06);
+      color: var(--color-primary, #0B2545);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .report-chip svg { width: 14px; height: 14px; }
+    .reports-cta-banner {
+      margin-top: 56px;
+      background: linear-gradient(135deg, var(--color-primary, #0B2545) 0%, #0F2F5F 100%);
+      color: #fff;
+      padding: 40px 32px;
+      border-radius: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .reports-cta-banner__text h3 {
+      color: #fff;
+      margin: 0 0 8px;
+      font-size: 1.5rem;
+    }
+    .reports-cta-banner__text p {
+      color: rgba(255,255,255,0.85);
+      margin: 0;
+      max-width: 56ch;
+    }
+    .reports-cta-banner .btn--primary {
+      background: var(--color-accent, #D4AF37);
+      color: #0B2545;
+      border: none;
+    }
+    .reports-cta-banner .btn--primary:hover {
+      background: #E6C24A;
+    }
+    .report-fit {
+      margin: 16px 0 12px;
+      padding: 12px 14px;
+      border-left: 3px solid var(--color-accent, #D4AF37);
+      background: rgba(212,175,55,0.06);
+      font-size: 0.95rem;
+      color: var(--color-text, #1a1a1a);
+    }
+    .report-fit strong { color: var(--color-primary, #0B2545); }
   </style>
 </head>
 <body>
-  <header class="header">
+  <!-- Skip Link -->
+  <a href="#main" class="sr-only" style="position:fixed;top:0;left:0;z-index:999;background:var(--color-primary);color:#fff;padding:12px 24px;transform:translateY(-100%);transition:transform 0.2s;" onfocus="this.style.transform='translateY(0)'" onblur="this.style.transform='translateY(-100%)'">Skip to main content</a>
+
+  <!-- ======================== HEADER (matches index.html) ======================== -->
+  <header class="header" id="header">
     <div class="container header__inner">
-      <a class="logo" href="./index.html" aria-label="Doctor Demographics home">
-        <span class="logo__mark" aria-hidden="true"></span>
-        <span class="logo__text">Doctor Demographics</span>
+      <a href="./index.html" class="header__logo" aria-label="Doctor Demographics , Home">
+        <img src="./assets/dd-logo-black.png" alt="Doctor Demographics" class="logo-light" width="180" height="53">
+        <img src="./assets/dd-logo-white.png" alt="Doctor Demographics" class="logo-dark" width="180" height="53">
       </a>
-      <nav class="nav" aria-label="Primary">
-        <a class="nav__link" href="./index.html#services">Services</a>
-        <a class="nav__link nav__link--active" href="./reports.html">Reports</a>
-        <a class="nav__link" href="./podcasts.html">Podcasts</a>
-        <a class="nav__link" href="./index.html#about">About</a>
-        <a class="nav__link" href="./index.html#contact">Contact</a>
+      <nav class="header__nav" aria-label="Main navigation">
+        <ul class="header__links" role="list">
+          <li><a href="./index.html#services">Reports</a></li>
+          <li><a href="./index.html#how-it-works">How It Works</a></li>
+          <li><a href="./index.html#about">About</a></li>
+          <li><a href="./podcasts.html">Podcast</a></li>
+          <li><a href="./index.html#testimonials">Testimonials</a></li>
+        </ul>
+        <div class="header__actions">
+          <button class="theme-toggle" data-theme-toggle aria-label="Switch to dark mode">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </button>
+          <a href="./index.html#contact" class="btn btn--primary">Get Started</a>
+        </div>
       </nav>
+      <div class="header__actions" style="display:flex;gap:var(--space-3);">
+        <button class="theme-toggle theme-toggle--mobile" data-theme-toggle aria-label="Switch to dark mode" style="display:none;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="mobile-toggle" aria-label="Open menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </div>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+      <ul class="mobile-nav__links" role="list">
+        <li><a href="./index.html#services">Reports</a></li>
+        <li><a href="./index.html#how-it-works">How It Works</a></li>
+        <li><a href="./index.html#about">About</a></li>
+        <li><a href="./podcasts.html">Podcast</a></li>
+        <li><a href="./index.html#testimonials">Testimonials</a></li>
+        <li><a href="./index.html#contact">Contact</a></li>
+      </ul>
+      <a href="./index.html#contact" class="btn btn--primary btn--lg">Get Started</a>
+    </nav>
   </header>
 
-  <main>
-    <section class="reports-hero">
+  <main id="main">
+
+    <!-- ======================== HERO ======================== -->
+    <section class="page-hero">
       <div class="container">
         <p class="section__eyebrow">Doctor Demographics</p>
-        <h1>Reports</h1>
-        <p class="section__desc">Our demographic reports help doctors, private equity groups, and consultants make confident market decisions. Each report is researched and hand-written by our team, then reviewed with you in a consultation call.</p>
+        <h1>Reports built to answer one question at a time</h1>
+        <p>Each report is researched and hand-written by our team, then reviewed with you on a one-on-one consultation call. Pick the report that matches the question you are trying to answer.</p>
       </div>
     </section>
 
-    <section class="section">
+    <!-- ======================== REPORTS GRID ======================== -->
+    <section class="services section">
       <div class="container">
         <div class="section__header">
+          <p class="section__eyebrow">Our Reports</p>
           <h2 class="section__title">Choose the report that fits your question</h2>
-          <p class="section__desc">Not sure which one you need? Start with a quick consult and we will point you in the right direction.</p>
+          <p class="section__desc">Not sure which one you need? Start with a quick consultation and we will point you in the right direction.</p>
         </div>
 
         <div class="reports-grid">
+
+          <!-- Best Sites Report -->
           <article class="service-card">
             <div class="service-card__icon">
-              <svg fill="none" height="28" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="28"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
             </div>
             <h3 class="service-card__title">Best Sites Report</h3>
-            <p class="service-card__desc">Best for doctors who are deciding where to practice. We compare counties and identify the top opportunities with clear reasons why each site is a strong fit.</p>
+            <p class="service-card__desc">Compare counties and identify the top opportunities for your practice, with clear reasons why each site is a strong fit.</p>
+            <div class="report-fit"><strong>Best for:</strong> doctors who are still deciding where to practice.</div>
             <ul class="service-card__features" role="list">
               <li>Up to 5 counties analyzed</li>
               <li>Top 5 practice sites with reasoning</li>
-              <li>Population trends, income, payer mix and growth</li>
-              <li>Includes consultation call</li>
+              <li>Population trends, income, payer mix, and growth</li>
+              <li>20-minute consultation included</li>
             </ul>
-            <div class="service-card__meta">
-              <span class="service-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>Placement</span>
-              <span class="service-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>Growth</span>
+            <div class="report-chips">
+              <span class="report-chip">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                Placement
+              </span>
+              <span class="report-chip">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                Growth
+              </span>
             </div>
-            <a class="btn btn--primary" href="./index.html#contact">Request a quote</a>
+            <a class="btn btn--primary" href="./index.html#contact" style="margin-top:20px;">Request a quote</a>
           </article>
 
+          <!-- Practice Site Viability Report -->
           <article class="service-card">
             <div class="service-card__icon">
-              <svg fill="none" height="28" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="28"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
             </div>
             <h3 class="service-card__title">Practice Site Viability Report</h3>
-            <p class="service-card__desc">Best for doctors who already have a specific address or site in mind. We analyze the surrounding market to confirm whether the location can support your practice.</p>
+            <p class="service-card__desc">Evaluate the market around a specific address or proposed site to confirm whether the location can support your practice.</p>
+            <div class="report-fit"><strong>Best for:</strong> doctors who already have a specific address or site in mind.</div>
             <ul class="service-card__features" role="list">
-              <li>14 zip code analysis + drive-time radii</li>
-              <li>Demand, competition and growth indicators</li>
+              <li>14 zip code analysis and drive-time radii</li>
+              <li>Demand, competition, and growth indicators</li>
               <li>Actionable recommendations</li>
-              <li>Includes consultation call</li>
+              <li>20-minute consultation included</li>
             </ul>
-            <div class="service-card__meta">
-              <span class="service-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/></svg>Site check</span>
-              <span class="service-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5m0 14h16M8 17V9m4 8V7m4 10v-6"/></svg>Competition</span>
+            <div class="report-chips">
+              <span class="report-chip">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                Site check
+              </span>
+              <span class="report-chip">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                Competition
+              </span>
             </div>
-            <a class="btn btn--primary" href="./index.html#contact">Request a quote</a>
+            <a class="btn btn--primary" href="./index.html#contact" style="margin-top:20px;">Request a quote</a>
           </article>
 
+          <!-- Competition Report -->
           <article class="service-card">
             <div class="service-card__icon">
-              <svg fill="none" height="28" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="28"><line x1="18" x2="18" y1="20" y2="10"></line><line x1="12" x2="12" y1="20" y2="4"></line><line x1="6" x2="6" y1="20" y2="14"></line></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="20" x2="18" y2="10"></line>
+                <line x1="12" y1="20" x2="12" y2="4"></line>
+                <line x1="6" y1="20" x2="6" y2="14"></line>
+              </svg>
             </div>
             <h3 class="service-card__title">Competition Report</h3>
-            <p class="service-card__desc">Best for clinics that want to understand their competitive landscape. We map competitors, estimate demand, and identify positioning opportunities.</p>
+            <p class="service-card__desc">Map the local competitive landscape, estimate demand, and identify clear positioning opportunities for your practice.</p>
+            <div class="report-fit"><strong>Best for:</strong> practices that want to understand and respond to their competition.</div>
             <ul class="service-card__features" role="list">
-              <li>Competitor identification and analysis</li>
-              <li>Market positioning and differentiation insights</li>
-              <li>Service mix and pricing context (where available)</li>
-              <li>Includes consultation call</li>
+              <li>Detailed competitor mapping</li>
+              <li>Market positioning insights</li>
+              <li>Improvement recommendations</li>
+              <li>20-minute consultation included</li>
             </ul>
-            <div class="service-card__meta">
-              <span class="service-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l3-3 4 4 7-7"/></svg>Strategy</span>
-              <span class="service-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>Insights</span>
+            <div class="report-chips">
+              <span class="report-chip">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                Benchmarking
+              </span>
+              <span class="report-chip">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                Positioning
+              </span>
             </div>
-            <a class="btn btn--primary" href="./index.html#contact">Request a quote</a>
+            <a class="btn btn--primary" href="./index.html#contact" style="margin-top:20px;">Request a quote</a>
           </article>
 
+          <!-- Telephone Consultation -->
           <article class="service-card">
             <div class="service-card__icon">
-              <svg fill="none" height="28" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="28"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
             </div>
             <h3 class="service-card__title">Telephone Consultation</h3>
-            <p class="service-card__desc">Best for teams that want to talk through a decision with an expert. We will help you clarify next steps and recommend the right analysis.</p>
+            <p class="service-card__desc">Talk through a decision with an expert. We help you clarify next steps and recommend the right analysis.</p>
+            <div class="report-fit"><strong>Best for:</strong> teams that want to talk through a decision before committing to a full report.</div>
             <ul class="service-card__features" role="list">
-              <li>Practice placement + growth planning</li>
-              <li>Marketing and market-entry strategy</li>
+              <li>One-on-one expert guidance</li>
+              <li>Practice placement strategy</li>
+              <li>Marketing and growth planning</li>
               <li>Flexible scheduling</li>
-              <li>Great starting point if you are unsure</li>
             </ul>
-            <div class="service-card__meta">
-              <span class="service-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a4 4 0 0 1-4 4H7l-4 4V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>Q&A</span>
-              <span class="service-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20l9-5-9-5-9 5 9 5z"/><path d="M12 12l9-5-9-5-9 5 9 5z"/></svg>Guidance</span>
+            <div class="report-chips">
+              <span class="report-chip">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                Strategy call
+              </span>
+              <span class="report-chip">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                Flexible
+              </span>
             </div>
-            <a class="btn btn--primary" href="./index.html#contact">Schedule a call</a>
+            <a class="btn btn--primary" href="./index.html#contact" style="margin-top:20px;">Request a call</a>
           </article>
+
         </div>
+
+        <!-- ======================== CTA BANNER ======================== -->
+        <div class="reports-cta-banner">
+          <div class="reports-cta-banner__text">
+            <h3>Not sure which report you need?</h3>
+            <p>Start with a quick consultation. We will help you pick the report that answers your question and saves you time and money.</p>
+          </div>
+          <a href="./index.html#contact" class="btn btn--primary btn--lg">Talk to an expert</a>
+        </div>
+
       </div>
     </section>
 
-    <section class="reports-cta">
-      <div class="container">
-        <div class="cta-card">
-          <div>
-            <h2 style="margin:0 0 6px;">Ready to choose a market with confidence?</h2>
-            <p style="margin:0; max-width: 70ch; color: rgba(255,255,255,.82);">Send us your specialty and the cities you are considering and we will recommend the right report.</p>
-          </div>
-          <a href="./index.html#contact">Contact Doctor Demographics</a>
-        </div>
-      </div>
-    </section>
   </main>
 
-  <footer class="footer">
-    <div class="container footer__inner">
-      <p class="footer__copyright">© <span id="year"></span> Doctor Demographics. All rights reserved.</p>
-      <nav class="footer__links" aria-label="Footer">
-        <a href="./reports.html">Reports</a>
-        <a href="./podcasts.html">Podcasts</a>
-        <a href="./index.html#contact">Contact</a>
-      </nav>
+  <!-- ======================== FOOTER (matches index.html) ======================== -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <img src="./assets/dd-logo-white.png" alt="Doctor Demographics" width="160" height="47">
+          <p class="footer__desc">We wrote the book (literally) on demographic studies for doctors. Over 40 years helping healthcare professionals make data-driven practice decisions.</p>
+        </div>
+        <div>
+          <h4 class="footer__heading">Navigation</h4>
+          <ul class="footer__links" role="list">
+            <li><a href="./index.html#services">Our Reports</a></li>
+            <li><a href="./index.html#how-it-works">How It Works</a></li>
+            <li><a href="./index.html#about">About Mike</a></li>
+            <li><a href="./podcasts.html">Podcast</a></li>
+            <li><a href="./index.html#testimonials">Testimonials</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer__heading">Reports</h4>
+          <ul class="footer__links" role="list">
+            <li><a href="./reports.html">Best Sites Report</a></li>
+            <li><a href="./reports.html">Site Viability Report</a></li>
+            <li><a href="./reports.html">Competition Report</a></li>
+            <li><a href="./reports.html">Consultation</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer__heading">Contact</h4>
+          <div class="footer__contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <a href="mailto:mike@doctordemographics.com" style="color:inherit;text-decoration:none;">mike@doctordemographics.com</a>
+          </div>
+          <div class="footer__contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            <a href="https://doctordemographics.com" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;">doctordemographics.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copyright">© 2026 Doctor Demographics. All rights reserved.</p>
+      </div>
     </div>
   </footer>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <script defer src="./app.js"></script>
 </body>
 </html>
